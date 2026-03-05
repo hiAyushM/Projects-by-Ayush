@@ -10,7 +10,7 @@ I build projects around Revenue Operations, CRM systems, automation, and data an
 Interactive HubSpot CRM diagnostic tool that evaluates pipeline structure, contact data quality, deal tracking, and reporting visibility.
 
 🔗Live Tool
-https://ayushmahajan.github.io/crm-audit-tool
+https://hiayushm.github.io/Projects-by-Ayush/CRM%20Audit.html
 
 📂Source Code
 https://github.com/hiAyushM/crm-audit-tool
