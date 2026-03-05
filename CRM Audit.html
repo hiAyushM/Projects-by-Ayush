@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HubSpot CRM Audit Template - Ayush Mahajan</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0c0f0a;
+  --surface: #141810;
+  --surface2: #1c211a;
+  --border: rgba(255,255,255,0.08);
+  --green: #4ade80;
+  --green-dim: rgba(74,222,128,0.12);
+  --yellow: #facc15;
+  --yellow-dim: rgba(250,204,21,0.12);
+  --orange: #fb923c;
+  --orange-dim: rgba(251,146,60,0.12);
+  --red: #f87171;
+  --red-dim: rgba(248,113,113,0.12);
+  --text: #e2e8d8;
+  --muted: #6b7560;
+  --accent: #a3e635;
+  --accent-dim: rgba(163,230,53,0.1);
+  --white: #ffffff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* HEADER */
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.brand-icon {
+  width: 40px; height: 40px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(163,230,53,0.3);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.brand-icon svg { color: var(--accent); }
+
+.brand-text-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.brand-text-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(163,230,53,0.25);
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.live-score-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.35rem 1rem 0.35rem 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.live-score-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--accent);
+  min-width: 2ch;
+  text-align: right;
+  transition: color 0.3s;
+}
+
+/* HERO BAND */
+.hero-band {
+  padding: 4rem 5vw 3rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-band::before {
+  content: 'AUDIT';
+  position: absolute;
+  right: 3vw;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Syne', sans-serif;
+  font-size: 10rem;
+  font-weight: 800;
+  color: rgba(163,230,53,0.04);
+  pointer-events: none;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+
+h1 span { color: var(--accent); }
+
+.hero-sub {
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 560px;
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+/* SECTION TABS */
+.section-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0 5vw;
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.tab-mini-score {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  background: var(--surface2);
+  color: var(--muted);
+  padding: 0.15rem 0.45rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+  min-width: 32px;
+  text-align: center;
+}
+
+.tab-mini-score.has-score {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-color: rgba(163,230,53,0.25);
+}
+
+/* MAIN LAYOUT */
+.main-wrap {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 5vw;
+  align-items: start;
+}
+
+/* AUDIT SECTIONS */
+.audit-sections { display: flex; flex-direction: column; gap: 3rem; }
+
+.audit-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  scroll-margin-top: 100px;
+}
+
+.section-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.section-title-wrap { display: flex; align-items: center; gap: 1rem; }
+
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.section-score-display {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.section-score-display small {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  font-weight: 400;
+  margin-left: 2px;
+}
+
+/* PROGRESS BAR */
+.section-progress {
+  height: 3px;
+  background: var(--surface2);
+}
+
+.section-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* QUESTIONS */
+.questions-list { padding: 0.5rem 0; }
+
+.question-item {
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  transition: background 0.15s;
+}
+
+.question-item:last-child { border-bottom: none; }
+.question-item:hover { background: rgba(163,230,53,0.02); }
+
+.q-text {
+  font-size: 0.88rem;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.q-points {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.q-options {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.q-btn {
+  padding: 0.4rem 0.9rem;
+  border-radius: 5px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--muted);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.q-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.q-btn.selected-yes {
+  background: rgba(74,222,128,0.15);
+  border-color: rgba(74,222,128,0.5);
+  color: var(--green);
+}
+
+.q-btn.selected-partial {
+  background: rgba(250,204,21,0.12);
+  border-color: rgba(250,204,21,0.4);
+  color: var(--yellow);
+}
+
+.q-btn.selected-no {
+  background: rgba(248,113,113,0.12);
+  border-color: rgba(248,113,113,0.4);
+  color: var(--red);
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-left: 2.5rem;
+}
+
+/* SCORE CARD */
+.score-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.score-card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.score-card-body { padding: 1.5rem; }
+
+.big-score {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.big-score-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--accent);
+  transition: color 0.4s;
+}
+
+.big-score-denom {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+.health-label {
+  display: inline-block;
+  padding: 0.35rem 1.1rem;
+  border-radius: 100px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-top: 0.5rem;
+  background: var(--green-dim);
+  color: var(--green);
+  border: 1px solid rgba(74,222,128,0.3);
+  transition: all 0.4s;
+}
+
+/* SCORE BREAKDOWN */
+.breakdown { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.breakdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.breakdown-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.breakdown-name {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.breakdown-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+}
+
+.breakdown-bar-bg {
+  height: 4px;
+  background: var(--surface2);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.breakdown-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  border-radius: 100px;
+  transition: width 0.5s ease;
+}
+
+/* RESULTS */
+.results-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: none;
+}
+
+.results-card.visible { display: block; }
+
+.results-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.results-body { padding: 1.5rem; }
+
+.rec-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.rec-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.rec-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.rec-dot.high { background: var(--red); }
+.rec-dot.med { background: var(--yellow); }
+.rec-dot.low { background: var(--green); }
+
+.rec-text { color: var(--text); }
+.rec-text strong { color: var(--white); font-weight: 600; }
+
+/* SUBMIT BTN */
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--accent);
+  color: #0c0f0a;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+}
+
+.submit-btn:hover {
+  background: #bef264;
+  transform: translateY(-1px);
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 5vw;
+  background: var(--surface);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 4rem;
+}
+
+.footer-credit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.footer-credit span { color: var(--accent); }
+
+.footer-cert {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-cert::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .main-wrap { grid-template-columns: 1fr; }
+  .sidebar { position: static; padding-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-brand">
+    <div class="brand-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </div>
+    <div>
+      <div class="brand-text-title">CRM Health Audit</div>
+      <div class="brand-text-sub">HubSpot RevOps Diagnostic</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge">RevOps Certified</div>
+    <div class="live-score-pill">
+      Score &nbsp;
+      <span class="live-score-num" id="headerScore">0</span>
+      <span style="color:var(--muted)">/100</span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero-band">
+  <div class="hero-eyebrow">HubSpot · B2B RevOps · Diagnostic Tool</div>
+  <h1>CRM <span>Audit</span><br/>Template</h1>
+  <p class="hero-sub">Answer 20 questions across 4 RevOps pillars. Get an instant health score for your HubSpot setup with prioritized fixes - built on real B2B campaign experience.</p>
+  <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);display:flex;align-items:center;gap:0.5rem;">
+      <span style="color:var(--accent)">20</span> Questions
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);display:flex;align-items:center;gap:0.5rem;">
+      <span style="color:var(--accent)">4</span> Audit Areas
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);display:flex;align-items:center;gap:0.5rem;">
+      <span style="color:var(--accent)">~5</span> Minutes
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="section-tabs">
+  <button class="tab-btn active" onclick="scrollTo('s1')">
+    Pipeline Structure <span class="tab-mini-score" id="tab1">0/25</span>
+  </button>
+  <button class="tab-btn" onclick="scrollTo('s2')">
+    Contact Data Quality <span class="tab-mini-score" id="tab2">0/25</span>
+  </button>
+  <button class="tab-btn" onclick="scrollTo('s3')">
+    Deal Tracking <span class="tab-mini-score" id="tab3">0/25</span>
+  </button>
+  <button class="tab-btn" onclick="scrollTo('s4')">
+    Reporting & Visibility <span class="tab-mini-score" id="tab4">0/25</span>
+  </button>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+  <div class="audit-sections">
+
+    <!-- SECTION 1 -->
+    <div class="audit-section" id="s1">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-num">01 /</span>
+          <span class="section-title">Pipeline Structure</span>
+        </div>
+        <div class="section-score-display" id="s1score">0<small>/25</small></div>
+      </div>
+      <div class="section-progress"><div class="section-progress-fill" id="p1"></div></div>
+      <div class="questions-list" id="ql1"></div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="audit-section" id="s2">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-num">02 /</span>
+          <span class="section-title">Contact Data Quality</span>
+        </div>
+        <div class="section-score-display" id="s2score">0<small>/25</small></div>
+      </div>
+      <div class="section-progress"><div class="section-progress-fill" id="p2"></div></div>
+      <div class="questions-list" id="ql2"></div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="audit-section" id="s3">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-num">03 /</span>
+          <span class="section-title">Deal Tracking</span>
+        </div>
+        <div class="section-score-display" id="s3score">0<small>/25</small></div>
+      </div>
+      <div class="section-progress"><div class="section-progress-fill" id="p3"></div></div>
+      <div class="questions-list" id="ql3"></div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="audit-section" id="s4">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-num">04 /</span>
+          <span class="section-title">Reporting & Visibility</span>
+        </div>
+        <div class="section-score-display" id="s4score">0<small>/25</small></div>
+      </div>
+      <div class="section-progress"><div class="section-progress-fill" id="p4"></div></div>
+      <div class="questions-list" id="ql4"></div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- SCORE CARD -->
+    <div class="score-card">
+      <div class="score-card-header">Overall Health Score</div>
+      <div class="score-card-body">
+        <div class="big-score">
+          <div class="big-score-num" id="bigScore">0</div>
+          <div class="big-score-denom">out of 100</div>
+          <div><span class="health-label" id="healthLabel">Not Started</span></div>
+        </div>
+        <div class="breakdown">
+          <div class="breakdown-item">
+            <div class="breakdown-top">
+              <span class="breakdown-name">Pipeline Structure</span>
+              <span class="breakdown-val" id="bv1">0/25</span>
+            </div>
+            <div class="breakdown-bar-bg"><div class="breakdown-bar-fill" id="bb1"></div></div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-top">
+              <span class="breakdown-name">Contact Data Quality</span>
+              <span class="breakdown-val" id="bv2">0/25</span>
+            </div>
+            <div class="breakdown-bar-bg"><div class="breakdown-bar-fill" id="bb2"></div></div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-top">
+              <span class="breakdown-name">Deal Tracking</span>
+              <span class="breakdown-val" id="bv3">0/25</span>
+            </div>
+            <div class="breakdown-bar-bg"><div class="breakdown-bar-fill" id="bb3"></div></div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-top">
+              <span class="breakdown-name">Reporting & Visibility</span>
+              <span class="breakdown-val" id="bv4">0/25</span>
+            </div>
+            <div class="breakdown-bar-bg"><div class="breakdown-bar-fill" id="bb4"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECOMMENDATIONS -->
+    <div class="results-card" id="resultsCard">
+      <div class="results-header">Priority Actions</div>
+      <div class="results-body" id="resultsBody"></div>
+    </div>
+
+    <button class="submit-btn" onclick="generateReport()">Generate Full Report</button>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-credit">Built by <span>Ayush Mahajan</span> · RevOps & Marketing Operations</div>
+  <div class="footer-cert">HubSpot Revenue Operations Certified · Mar 2026</div>
+</footer>
+
+<script>
+const sections = [
+  {
+    id: 1,
+    questions: [
+      { text: "Are deal stages clearly defined with entry and exit criteria for each stage?", pts: 5 },
+      { text: "Does your pipeline have at least 5 distinct stages that reflect the buyer journey?", pts: 5 },
+      { text: "Are pipeline stages built around buyer actions - not just internal sales tasks?", pts: 5 },
+      { text: "Do you review and clean stale or inactive deals at least once a month?", pts: 5 },
+      { text: "Do you have separate pipelines for different segments, products, or deal types?", pts: 5 },
+    ]
+  },
+  {
+    id: 2,
+    questions: [
+      { text: "Are contact records required to capture: name, email, company, and job title?", pts: 5 },
+      { text: "Is lead source tracked consistently across all contacts in your CRM?", pts: 5 },
+      { text: "Do you have a process to prevent or merge duplicate contact records?", pts: 5 },
+      { text: "Are ICP properties (industry, company size, region) set up as contact fields?", pts: 5 },
+      { text: "Are all contacts assigned a lifecycle stage (Lead / MQL / SQL / Customer)?", pts: 5 },
+    ]
+  },
+  {
+    id: 3,
+    questions: [
+      { text: "Is close date a required field on all active deals in your pipeline?", pts: 5 },
+      { text: "Is deal amount / expected revenue tracked on every deal?", pts: 5 },
+      { text: "Is each deal associated with both a contact and a company record?", pts: 5 },
+      { text: "Are activities (calls, emails, meetings) logged and attached to deals?", pts: 5 },
+      { text: "Are lost reasons captured when a deal is marked Closed Lost?", pts: 5 },
+    ]
+  },
+  {
+    id: 4,
+    questions: [
+      { text: "Does your team have a live sales dashboard that is reviewed weekly?", pts: 5 },
+      { text: "Can you see stage-by-stage conversion rates across your entire pipeline?", pts: 5 },
+      { text: "Do you track average deal velocity - time from creation to close?", pts: 5 },
+      { text: "Is email outreach connected to your CRM and tracked at the deal/contact level?", pts: 5 },
+      { text: "Do you run a structured monthly pipeline review using CRM data?", pts: 5 },
+    ]
+  }
+];
+
+// Answers store: [section][question] = pts (0, 2.5, or 5)
+const answers = [
+  new Array(5).fill(null),
+  new Array(5).fill(null),
+  new Array(5).fill(null),
+  new Array(5).fill(null),
+];
+
+function buildQuestions() {
+  sections.forEach((sec, si) => {
+    const container = document.getElementById(`ql${si + 1}`);
+    sec.questions.forEach((q, qi) => {
+      const el = document.createElement('div');
+      el.className = 'question-item';
+      el.innerHTML = `
+        <div>
+          <div class="q-text">${q.text}</div>
+          <div class="q-points">${q.pts} pts</div>
+        </div>
+        <div class="q-options">
+          <button class="q-btn" id="btn-${si}-${qi}-yes" onclick="answer(${si},${qi},${q.pts},'yes')">Yes</button>
+          <button class="q-btn" id="btn-${si}-${qi}-partial" onclick="answer(${si},${qi},${q.pts * 0.5},'partial')">Partial</button>
+          <button class="q-btn" id="btn-${si}-${qi}-no" onclick="answer(${si},${qi},0,'no')">No</button>
+        </div>
+      `;
+      container.appendChild(el);
+    });
+  });
+}
+
+function answer(si, qi, pts, type) {
+  answers[si][qi] = pts;
+  // Update button styles
+  ['yes','partial','no'].forEach(t => {
+    const btn = document.getElementById(`btn-${si}-${qi}-${t}`);
+    btn.className = 'q-btn' + (t === type ? ` selected-${t}` : '');
+  });
+  updateScores();
+}
+
+function sectionScore(si) {
+  return answers[si].reduce((sum, v) => sum + (v !== null ? v : 0), 0);
+}
+
+function totalScore() {
+  return sections.reduce((sum, _, si) => sum + sectionScore(si), 0);
+}
+
+function updateScores() {
+  const total = totalScore();
+
+  // Header
+  document.getElementById('headerScore').textContent = Math.round(total);
+  document.getElementById('bigScore').textContent = Math.round(total);
+
+  // Section scores + progress bars + tabs
+  sections.forEach((_, si) => {
+    const s = sectionScore(si);
+    const pct = (s / 25) * 100;
+    document.getElementById(`s${si+1}score`).innerHTML = `${Math.round(s)}<small>/25</small>`;
+    document.getElementById(`p${si+1}`).style.width = pct + '%';
+    document.getElementById(`bv${si+1}`).textContent = `${Math.round(s)}/25`;
+    document.getElementById(`bb${si+1}`).style.width = pct + '%';
+
+    const tabEl = document.getElementById(`tab${si+1}`);
+    tabEl.textContent = `${Math.round(s)}/25`;
+    tabEl.className = 'tab-mini-score' + (s > 0 ? ' has-score' : '');
+  });
+
+  // Health label
+  const hl = document.getElementById('healthLabel');
+  const bsn = document.getElementById('bigScore');
+  const hsc = document.getElementById('headerScore');
+
+  if (total >= 85) {
+    hl.textContent = 'Healthy'; hl.style.background = 'rgba(74,222,128,0.12)'; hl.style.color = '#4ade80'; hl.style.borderColor = 'rgba(74,222,128,0.3)';
+    bsn.style.color = '#4ade80'; hsc.style.color = '#4ade80';
+  } else if (total >= 65) {
+    hl.textContent = 'Needs Attention'; hl.style.background = 'rgba(250,204,21,0.12)'; hl.style.color = '#facc15'; hl.style.borderColor = 'rgba(250,204,21,0.3)';
+    bsn.style.color = '#facc15'; hsc.style.color = '#facc15';
+  } else if (total >= 40) {
+    hl.textContent = 'At Risk'; hl.style.background = 'rgba(251,146,60,0.12)'; hl.style.color = '#fb923c'; hl.style.borderColor = 'rgba(251,146,60,0.3)';
+    bsn.style.color = '#fb923c'; hsc.style.color = '#fb923c';
+  } else if (total > 0) {
+    hl.textContent = 'Critical'; hl.style.background = 'rgba(248,113,113,0.12)'; hl.style.color = '#f87171'; hl.style.borderColor = 'rgba(248,113,113,0.3)';
+    bsn.style.color = '#f87171'; hsc.style.color = '#f87171';
+  } else {
+    hl.textContent = 'Not Started'; hl.style.background = ''; hl.style.color = ''; hl.style.borderColor = '';
+    bsn.style.color = 'var(--accent)'; hsc.style.color = 'var(--accent)';
+  }
+}
+
+function generateReport() {
+  const recs = [];
+  const sNames = ['Pipeline Structure', 'Contact Data Quality', 'Deal Tracking', 'Reporting & Visibility'];
+  const fixes = [
+    [
+      "Define entry and exit criteria for every deal stage - this removes rep ambiguity and bad data.",
+      "Restructure stages around what the buyer does, not what the rep does (e.g. 'Demo Completed' not 'Demo Sent').",
+      "Schedule a monthly pipeline hygiene session to close or advance stale deals older than 30 days.",
+      "Audit your pipeline stages against your actual sales motion - remove any unused stages.",
+      "Create separate pipelines for inbound vs outbound or SMB vs Enterprise to keep data clean.",
+    ],
+    [
+      "Make name, email, company, and job title required fields - enforce this at the form/import level.",
+      "Add a lead source property and backfill it for existing contacts - this is critical for attribution.",
+      "Set up HubSpot's duplicate management tool and run a deduplication pass this week.",
+      "Create custom properties for industry, company size, and region - tag all ICP contacts immediately.",
+      "Set lifecycle stages for all contacts and create a workflow to auto-advance them based on activity.",
+    ],
+    [
+      "Make close date required on deal creation - without it, pipeline forecasting is impossible.",
+      "Add deal amount as a required field. Even estimates are better than blank values.",
+      "Run a report for deals missing associated contact or company and fix them manually.",
+      "Enable email and call logging - at minimum, reps should log every meaningful touchpoint.",
+      "Create a dropdown for 'Closed Lost Reason' and make it required when a deal is lost.",
+    ],
+    [
+      "Build a core sales dashboard with: open pipeline by stage, deals created this week, close rate.",
+      "Use HubSpot's funnel report to see conversion rates between each stage - review weekly.",
+      "Create a 'Deal Velocity' property that calculates days from creation to close for each deal.",
+      "Connect your email inbox to HubSpot or use sequences - untracked outreach is invisible revenue.",
+      "Run a structured pipeline review every month: look at created, closed won, closed lost, and velocity.",
+    ]
+  ];
+
+  sections.forEach((sec, si) => {
+    sec.questions.forEach((q, qi) => {
+      const val = answers[si][qi];
+      if (val === null || val < sec.questions[qi].pts) {
+        const priority = val === 0 ? 'high' : val === null ? 'high' : 'med';
+        recs.push({ priority, section: sNames[si], text: fixes[si][qi] });
+      }
+    });
+  });
+
+  if (recs.length === 0) {
+    document.getElementById('resultsBody').innerHTML = `<div class="rec-item"><div class="rec-dot low"></div><div class="rec-text"><strong>Excellent!</strong> Your CRM scores clean across all 4 pillars. Focus on maintaining these standards and sharing this framework with your team.</div></div>`;
+  } else {
+    const sorted = recs.sort((a, b) => (a.priority === 'high' ? -1 : 1));
+    const top = sorted.slice(0, 5);
+    document.getElementById('resultsBody').innerHTML = top.map(r => `
+      <div class="rec-item">
+        <div class="rec-dot ${r.priority}"></div>
+        <div class="rec-text"><strong>${r.section}:</strong> ${r.text}</div>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('resultsCard').classList.add('visible');
+  document.getElementById('resultsCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function scrollTo(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+buildQuestions();
+</script>
+</body>
+</html>
